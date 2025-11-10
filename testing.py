@@ -4,10 +4,10 @@ from hpsv3 import HPSv3RewardInferencer
 inferencer = HPSv3RewardInferencer(device='cuda')
 
 # Evaluate images
-image_paths = ["assets/example1.png", "assets/example2.png"]
+image_paths = ["assets/304_ideogram.jpg", "assets/304_nanobanana.jpg"]
 prompts = [
-  "cute chibi anime cartoon fox, smiling wagging tail with a small cartoon heart above sticker",
-  "cute chibi anime cartoon fox, smiling wagging tail with a small cartoon heart above sticker"
+  "photorealistic image of a stainless steel kitchen sink with water droplets",
+  "photorealistic image of a stainless steel kitchen sink with water droplets"
 ]
 
 # Get preference scores
