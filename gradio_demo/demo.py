@@ -516,7 +516,7 @@ def main():
     demo.launch(
         server_name="0.0.0.0",
         server_port=7860,
-        share=False,
+        share=True,
         favicon_path=None,
         show_error=True,
     )
