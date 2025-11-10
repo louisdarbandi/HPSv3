@@ -137,7 +137,7 @@ def score_with_model(model_key, image_paths, prompts):
     config = MODEL_CONFIGS[model_key]
     
     if config["type"] == "hpsv3":
-        rewards = model.reward(image_paths, prompts)
+        rewards = model.reward(prompts, image_paths)
         return [reward[0].item() for reward in rewards]  # HPSv3 returns tensor with multiple values, take first
     elif config["type"] == "hpsv2":
         return score_hpsv2_batch(model, image_paths, prompts)
@@ -513,12 +513,22 @@ with gr.Blocks(theme=gr.themes.Soft(), title="HPSv3 - Human Preference Score v3"
 
 def main():
     """Main function to launch the demo."""
-    demo.launch(
-        server_name="0.0.0.0",
-        server_port=7860,
-        share=True,
+    def _env_flag(name, default="0"):
+        return str(os.getenv(name, default)).lower() in ("1", "true", "yes", "on")
+
+    server_name = os.getenv("GRADIO_SERVER_NAME", "0.0.0.0")
+    server_port = int(os.getenv("PORT", os.getenv("GRADIO_SERVER_PORT", "7860")))
+    share = True
+    root_path = os.getenv("GRADIO_ROOT_PATH", None)
+
+    demo.queue().launch(
+        server_name=server_name,
+        server_port=server_port,
+        share=share,
+        root_path=root_path,
         favicon_path=None,
         show_error=True,
+        inbrowser=False,
     )
 
 if __name__ == "__main__":
