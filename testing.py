@@ -17,4 +17,5 @@ prompts = [
 # Get preference scores
 rewards = inferencer.reward(prompts, image_paths=image_paths)
 scores = [reward[0].item() for reward in rewards]  # Extract mu values
-print([f"Image scores: {score}, {image_path}"] for score, image_path in zip(scores,image_paths))
+for score, image_path in zip(scores, image_paths):
+    print(f"Image score: {score}, {image_path}")
